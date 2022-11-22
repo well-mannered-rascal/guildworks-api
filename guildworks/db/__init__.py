@@ -1,4 +1,4 @@
-from manager import DBManager
+from .manager import DBManager
 
 # TODO Use config manager
 connection = """"""
