@@ -15,28 +15,34 @@ class TestModel(Base):
         return "TestModel: id='%i' name='%s'" % (self.id, self.name)
 
 
-# class Adventurer(Base):
-#     __tablename__ = "adventurer"
+class Adventurer(Base):
+    __tablename__ = "adventurer"
 
-#     id = Column(Integer, primary_key=True)
-#     first_name = Column(String)
-#     last_name = Column(String)
-#     role = Column(String)
-#     # rank TODO calculate this value based on rank points
-#     rank_points = Column(Integer)
-#     career_earnings = Column(Numeric)
-#     party_id = Column(Integer, ForeignKey("party.id"))
-#     party = relationship("Party", back_populates="adventurer")
+    id = Column(Integer, primary_key=True)
+    first_name = Column(String)
+    last_name = Column(String)
+    role = Column(String)
+    # rank TODO calculate this value based on rank points
+    rank_points = Column(Integer)
+    career_earnings = Column(Numeric)
+    party_id = Column(Integer, ForeignKey("party.id"))
+
+    def __repr__(self):
+        return "Adventurer: '%s' '%s', '%s'" % (
+            self.first_name,
+            self.last_name,
+            self.role,
+        )
 
 
-# class Party(Base):
-#     __tablename__ = "party"
+class Party(Base):
+    __tablename__ = "party"
 
-#     id = Column(Integer, primary_key=True)
-#     name = Column(String)
-#     leader = Column(Integer, ForeignKey("adventurer.id"))
-#     members = relationship("Adventurer", back_populates="party")
-#     # rank TODO Add calculated rank based on averaging of members rank
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    # leader = Column(Integer, ForeignKey("adventurer.id"))
+    members = relationship("Adventurer")
+    # rank TODO Add calculated rank based on averaging of members rank
 
 
 # class Quest(Base):
