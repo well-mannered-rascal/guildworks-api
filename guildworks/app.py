@@ -5,4 +5,4 @@ app = application = falcon.App()
 
 quests = QuestsResource()
 
-app.add_route('/quests', quests)
+app.add_route("/quests", quests)
