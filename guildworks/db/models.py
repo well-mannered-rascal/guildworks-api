@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Numeric, DateTime
+from sqlalchemy import Column, Integer, String, ForeignKey, Numeric, DateTime, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 
@@ -51,9 +51,14 @@ class Party(Base):
 class Quest(Base):
     __tablename__ = "quest"
 
+    STATUS_OPEN = "open"
+    STATUS_CLOSED = "closed"
+    STATUS_ASSIGNED = "assigned"
+
     id = Column(Integer, primary_key=True)
     type = Column(String)  # TODO define dedicated table for quest types
     title = Column(String)
+    recurring = Column(Boolean)
     required_rank = Column(String)
     reward = Column(String)
     rank_reward = Column(String)
