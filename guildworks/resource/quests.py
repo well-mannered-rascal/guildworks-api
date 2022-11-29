@@ -1,4 +1,5 @@
 import falcon
+from falcon import Request, Response
 from ..db import DBManager
 from ..db.models import Quest
 
@@ -10,11 +11,11 @@ class QuestsResource:
         result = []
         with DBManager.sessionmaker() as session:
             row: Quest
-            for row in session.query(Quest).all():
+            for row in session.query(Quest).filter(Quest.status == Quest.STATUS_OPEN):
                 result.append(row.as_dict())
 
         resp.media = result
         resp.status = falcon.HTTP_200
 
-    def on_post(self, req, resp):
+    def on_post(self, req: Request, resp: Response):
         print(req.media)
